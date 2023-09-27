@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cow
+* source:	https://sketchfab.com/3d-models/cow-ac690ff3c84d4a8e8066dfcb4818ccb8
+* author:	all of life (https://sketchfab.com/Xfdfgd)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cow" (https://sketchfab.com/3d-models/cow-ac690ff3c84d4a8e8066dfcb4818ccb8) by all of life (https://sketchfab.com/Xfdfgd) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
