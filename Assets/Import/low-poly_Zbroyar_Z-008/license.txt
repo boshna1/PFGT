@@ -1,0 +1,11 @@
+Model Information:
+* title:	low-poly Zbroyar Z-008
+* source:	https://sketchfab.com/3d-models/low-poly-zbroyar-z-008-93f73554433f4130bb357acb4362462b
+* author:	D.U. (https://sketchfab.com/D.U.)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "low-poly Zbroyar Z-008" (https://sketchfab.com/3d-models/low-poly-zbroyar-z-008-93f73554433f4130bb357acb4362462b) by D.U. (https://sketchfab.com/D.U.) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

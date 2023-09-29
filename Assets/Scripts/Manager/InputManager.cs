@@ -6,7 +6,7 @@ using UnityEngine;
 public static class InputManager
 {
     private static GameControls _gameControls;
-    public static void Init(Player myPlayer,Object Sphere, float x, float y, float z,Quaternion CowR,Transform Cow)
+    public static void Init(Player myPlayer,Object Sphere,Quaternion CowR,Transform Cow)
     {
         _gameControls = new GameControls();
         _gameControls.Permanent.Enable();
@@ -23,7 +23,7 @@ public static class InputManager
 
         _gameControls.InGame.Shoot.performed += w =>
         {
-            Object.Instantiate(Sphere,new Vector3(Cow.position.x,Cow.position.y + 1,Cow.position.z + 2),CowR,Cow);
+            Object.Instantiate(Sphere,new Vector3(Cow.position.x,Cow.position.y + 0.2f,Cow.position.z + 1),CowR,Cow);
         };
     }
     public static void SetGameControls()
