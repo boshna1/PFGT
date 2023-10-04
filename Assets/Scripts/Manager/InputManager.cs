@@ -18,7 +18,7 @@ public static class InputManager
 
         _gameControls.InGame.Jump.performed += w =>
         {
-            myPlayer.SetJump(w.ReadValue<Vector3>());  
+            myPlayer.SetJump();  
         };
 
         _gameControls.InGame.Shoot.performed += w =>
