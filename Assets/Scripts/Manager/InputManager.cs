@@ -6,7 +6,8 @@ using UnityEngine;
 public static class InputManager
 {
     private static GameControls _gameControls;
-    public static void Init(Player myPlayer,Object Sphere,Quaternion CowR,Transform Cow)
+    
+    public static void Init(Player myPlayer)
     {
         _gameControls = new GameControls();
         _gameControls.Permanent.Enable();
@@ -23,9 +24,26 @@ public static class InputManager
 
         _gameControls.InGame.Shoot.performed += w =>
         {
-            Object.Instantiate(Sphere,new Vector3(Cow.position.x,Cow.position.y + 0.2f,Cow.position.z + 1),CowR,Cow);
+            if (DisplayText.instance.GetBullet() > 0)
+            {
+                myPlayer.Shoot();
+                DisplayText.instance.RemoveBullet();
+            }
         };
-    }
+
+        _gameControls.InGame.Look.performed += ctx =>
+        {
+            myPlayer.SetLookRotation(ctx.ReadValue<Vector2>());
+        };
+
+        _gameControls.InGame.Reload.performed += w =>
+        {
+            if (DisplayText.instance.GetBullet() < 6)
+            { 
+            DisplayText.instance.Reload();
+            }
+        };
+    }   
     public static void SetGameControls()
     {
         _gameControls.InGame.Enable();
