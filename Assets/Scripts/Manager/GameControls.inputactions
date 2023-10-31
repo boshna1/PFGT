@@ -49,6 +49,24 @@
                     "processors": "InvertVector2(invertX=false)",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchWeaponSniper",
+                    "type": "Button",
+                    "id": "a7564206-9c95-4bd0-803a-1a9e4da8d843",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchWeaponShotgun",
+                    "type": "Button",
+                    "id": "a715c889-31a7-49c5-b982-2f0838cc2c97",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -181,6 +199,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2bf96709-4efd-43b5-aa76-d6ba6b37f253",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeaponSniper",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8993f5a8-c923-4d21-8168-7459ff3139e0",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeaponShotgun",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

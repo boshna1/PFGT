@@ -71,6 +71,24 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": ""InvertVector2(invertX=false)"",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchWeaponSniper"",
+                    ""type"": ""Button"",
+                    ""id"": ""a7564206-9c95-4bd0-803a-1a9e4da8d843"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchWeaponShotgun"",
+                    ""type"": ""Button"",
+                    ""id"": ""a715c889-31a7-49c5-b982-2f0838cc2c97"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -205,6 +223,28 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bf96709-4efd-43b5-aa76-d6ba6b37f253"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeaponSniper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8993f5a8-c923-4d21-8168-7459ff3139e0"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeaponShotgun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -274,6 +314,8 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_InGame_Shoot = m_InGame.FindAction("Shoot", throwIfNotFound: true);
         m_InGame_Reload = m_InGame.FindAction("Reload", throwIfNotFound: true);
         m_InGame_Look = m_InGame.FindAction("Look", throwIfNotFound: true);
+        m_InGame_SwitchWeaponSniper = m_InGame.FindAction("SwitchWeaponSniper", throwIfNotFound: true);
+        m_InGame_SwitchWeaponShotgun = m_InGame.FindAction("SwitchWeaponShotgun", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -346,6 +388,8 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_Shoot;
     private readonly InputAction m_InGame_Reload;
     private readonly InputAction m_InGame_Look;
+    private readonly InputAction m_InGame_SwitchWeaponSniper;
+    private readonly InputAction m_InGame_SwitchWeaponShotgun;
     public struct InGameActions
     {
         private @GameControls m_Wrapper;
@@ -355,6 +399,8 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_InGame_Shoot;
         public InputAction @Reload => m_Wrapper.m_InGame_Reload;
         public InputAction @Look => m_Wrapper.m_InGame_Look;
+        public InputAction @SwitchWeaponSniper => m_Wrapper.m_InGame_SwitchWeaponSniper;
+        public InputAction @SwitchWeaponShotgun => m_Wrapper.m_InGame_SwitchWeaponShotgun;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -379,6 +425,12 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @SwitchWeaponSniper.started += instance.OnSwitchWeaponSniper;
+            @SwitchWeaponSniper.performed += instance.OnSwitchWeaponSniper;
+            @SwitchWeaponSniper.canceled += instance.OnSwitchWeaponSniper;
+            @SwitchWeaponShotgun.started += instance.OnSwitchWeaponShotgun;
+            @SwitchWeaponShotgun.performed += instance.OnSwitchWeaponShotgun;
+            @SwitchWeaponShotgun.canceled += instance.OnSwitchWeaponShotgun;
         }
 
         private void UnregisterCallbacks(IInGameActions instance)
@@ -398,6 +450,12 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @SwitchWeaponSniper.started -= instance.OnSwitchWeaponSniper;
+            @SwitchWeaponSniper.performed -= instance.OnSwitchWeaponSniper;
+            @SwitchWeaponSniper.canceled -= instance.OnSwitchWeaponSniper;
+            @SwitchWeaponShotgun.started -= instance.OnSwitchWeaponShotgun;
+            @SwitchWeaponShotgun.performed -= instance.OnSwitchWeaponShotgun;
+            @SwitchWeaponShotgun.canceled -= instance.OnSwitchWeaponShotgun;
         }
 
         public void RemoveCallbacks(IInGameActions instance)
@@ -514,6 +572,8 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnSwitchWeaponSniper(InputAction.CallbackContext context);
+        void OnSwitchWeaponShotgun(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

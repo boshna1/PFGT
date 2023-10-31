@@ -24,7 +24,7 @@ public static class InputManager
 
         _gameControls.InGame.Shoot.performed += w =>
         {
-            if (DisplayText.instance.GetBullet() > 0)
+            if (DisplayText.instance.GetBullet() > 0 && myPlayer.GetDisableShoot() == false)
             {
                 myPlayer.Shoot();
                 DisplayText.instance.RemoveBullet();
@@ -42,6 +42,14 @@ public static class InputManager
             { 
             DisplayText.instance.Reload();
             }
+        };
+        _gameControls.InGame.SwitchWeaponSniper.performed += w =>
+        {
+            myPlayer.SwitchSniper();
+        };
+        _gameControls.InGame.SwitchWeaponShotgun.performed += w =>
+        {
+            myPlayer.SwitchShotgun();
         };
     }   
     public static void SetGameControls()

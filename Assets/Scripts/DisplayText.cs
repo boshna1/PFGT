@@ -10,8 +10,13 @@ public class DisplayText : MonoBehaviour
     public string Textdis;
     public int CoinCount;
     public Text ammoText;
-    public int MagCount = 6;
-    public int TotalAmmoCount = 54;
+    public int SniperAmmo = 6;
+    public int TotalSniperAmmo = 56;
+    public int ShotgunAmmo = 4;
+    public int TotalShotgunAmmo = 16;
+    public int MagCount;
+    public int TotalAmmoCount;
+    public Player player;
 
 
     // Start is called before the first frame update
@@ -56,6 +61,29 @@ public class DisplayText : MonoBehaviour
 
     public void AddTotalAmmo()
     {
-        TotalAmmoCount += 28;
+        if (player.GetWeaponType().Equals("Sniper"))
+        {
+            TotalAmmoCount += 6 ;
+        }
+        if (player.GetWeaponType().Equals("Shotgun"))
+        {
+            TotalAmmoCount += 12;
+        }
+
+    }
+
+    public void SwitchSniper()
+    {
+        ShotgunAmmo = MagCount;
+        TotalShotgunAmmo = TotalAmmoCount;
+        MagCount = SniperAmmo;
+        TotalAmmoCount = TotalSniperAmmo;
+    }
+    public void SwitchShotgun() 
+    {
+        SniperAmmo = MagCount;
+        TotalSniperAmmo = TotalAmmoCount;
+        MagCount = ShotgunAmmo;
+        TotalAmmoCount = TotalShotgunAmmo;
     }
 }
