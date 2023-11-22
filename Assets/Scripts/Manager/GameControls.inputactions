@@ -24,15 +24,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shoot",
-                    "type": "Button",
-                    "id": "cc5b7c82-9365-4aa6-8bed-bd5889290558",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Reload",
                     "type": "Button",
                     "id": "946b0d9b-eb55-4589-bcca-4da6135a9a8e",
@@ -67,6 +58,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchWeaponAR",
+                    "type": "Button",
+                    "id": "25c29b86-a999-4783-8f48-2bcf3ffcec52",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchWeaponBurst",
+                    "type": "Button",
+                    "id": "7392d0a5-56a0-4b90-a085-71b66892443c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShootHold",
+                    "type": "Button",
+                    "id": "4c3c4f80-3ae1-4d5d-b574-43a718efbdf4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -160,17 +178,6 @@
                 },
                 {
                     "name": "",
-                    "id": "48ce05e2-ff34-4d08-a96b-4db5d33ea6f2",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "19ff8ecd-b881-4d59-b82b-73e7f6ac021f",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -221,6 +228,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchWeaponShotgun",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc8cdcff-8f62-415d-8555-f1d316c8f6f1",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeaponAR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59b8c6e7-4bee-40f7-a6ae-7efe1ca9504b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShootHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6d1f010-e15f-4294-a4fc-bb3ee9748bf6",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeaponBurst",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

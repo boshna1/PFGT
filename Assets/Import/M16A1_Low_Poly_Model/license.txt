@@ -1,0 +1,11 @@
+Model Information:
+* title:	M16A1 Low Poly Model
+* source:	https://sketchfab.com/3d-models/m16a1-low-poly-model-4e2ecf56f66e43629485b3eed20d78c7
+* author:	DocLDX (https://sketchfab.com/doctorldx)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "M16A1 Low Poly Model" (https://sketchfab.com/3d-models/m16a1-low-poly-model-4e2ecf56f66e43629485b3eed20d78c7) by DocLDX (https://sketchfab.com/doctorldx) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -46,15 +46,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Shoot"",
-                    ""type"": ""Button"",
-                    ""id"": ""cc5b7c82-9365-4aa6-8bed-bd5889290558"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Reload"",
                     ""type"": ""Button"",
                     ""id"": ""946b0d9b-eb55-4589-bcca-4da6135a9a8e"",
@@ -89,6 +80,33 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchWeaponAR"",
+                    ""type"": ""Button"",
+                    ""id"": ""25c29b86-a999-4783-8f48-2bcf3ffcec52"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchWeaponBurst"",
+                    ""type"": ""Button"",
+                    ""id"": ""7392d0a5-56a0-4b90-a085-71b66892443c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShootHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c3c4f80-3ae1-4d5d-b574-43a718efbdf4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -182,17 +200,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""48ce05e2-ff34-4d08-a96b-4db5d33ea6f2"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Shoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""19ff8ecd-b881-4d59-b82b-73e7f6ac021f"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
@@ -243,6 +250,39 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwitchWeaponShotgun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc8cdcff-8f62-415d-8555-f1d316c8f6f1"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeaponAR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59b8c6e7-4bee-40f7-a6ae-7efe1ca9504b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6d1f010-e15f-4294-a4fc-bb3ee9748bf6"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeaponBurst"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -311,11 +351,13 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_InGame = asset.FindActionMap("InGame", throwIfNotFound: true);
         m_InGame_Movement = m_InGame.FindAction("Movement", throwIfNotFound: true);
         m_InGame_Jump = m_InGame.FindAction("Jump", throwIfNotFound: true);
-        m_InGame_Shoot = m_InGame.FindAction("Shoot", throwIfNotFound: true);
         m_InGame_Reload = m_InGame.FindAction("Reload", throwIfNotFound: true);
         m_InGame_Look = m_InGame.FindAction("Look", throwIfNotFound: true);
         m_InGame_SwitchWeaponSniper = m_InGame.FindAction("SwitchWeaponSniper", throwIfNotFound: true);
         m_InGame_SwitchWeaponShotgun = m_InGame.FindAction("SwitchWeaponShotgun", throwIfNotFound: true);
+        m_InGame_SwitchWeaponAR = m_InGame.FindAction("SwitchWeaponAR", throwIfNotFound: true);
+        m_InGame_SwitchWeaponBurst = m_InGame.FindAction("SwitchWeaponBurst", throwIfNotFound: true);
+        m_InGame_ShootHold = m_InGame.FindAction("ShootHold", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -385,22 +427,26 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private List<IInGameActions> m_InGameActionsCallbackInterfaces = new List<IInGameActions>();
     private readonly InputAction m_InGame_Movement;
     private readonly InputAction m_InGame_Jump;
-    private readonly InputAction m_InGame_Shoot;
     private readonly InputAction m_InGame_Reload;
     private readonly InputAction m_InGame_Look;
     private readonly InputAction m_InGame_SwitchWeaponSniper;
     private readonly InputAction m_InGame_SwitchWeaponShotgun;
+    private readonly InputAction m_InGame_SwitchWeaponAR;
+    private readonly InputAction m_InGame_SwitchWeaponBurst;
+    private readonly InputAction m_InGame_ShootHold;
     public struct InGameActions
     {
         private @GameControls m_Wrapper;
         public InGameActions(@GameControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_InGame_Movement;
         public InputAction @Jump => m_Wrapper.m_InGame_Jump;
-        public InputAction @Shoot => m_Wrapper.m_InGame_Shoot;
         public InputAction @Reload => m_Wrapper.m_InGame_Reload;
         public InputAction @Look => m_Wrapper.m_InGame_Look;
         public InputAction @SwitchWeaponSniper => m_Wrapper.m_InGame_SwitchWeaponSniper;
         public InputAction @SwitchWeaponShotgun => m_Wrapper.m_InGame_SwitchWeaponShotgun;
+        public InputAction @SwitchWeaponAR => m_Wrapper.m_InGame_SwitchWeaponAR;
+        public InputAction @SwitchWeaponBurst => m_Wrapper.m_InGame_SwitchWeaponBurst;
+        public InputAction @ShootHold => m_Wrapper.m_InGame_ShootHold;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -416,9 +462,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Shoot.started += instance.OnShoot;
-            @Shoot.performed += instance.OnShoot;
-            @Shoot.canceled += instance.OnShoot;
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
@@ -431,6 +474,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @SwitchWeaponShotgun.started += instance.OnSwitchWeaponShotgun;
             @SwitchWeaponShotgun.performed += instance.OnSwitchWeaponShotgun;
             @SwitchWeaponShotgun.canceled += instance.OnSwitchWeaponShotgun;
+            @SwitchWeaponAR.started += instance.OnSwitchWeaponAR;
+            @SwitchWeaponAR.performed += instance.OnSwitchWeaponAR;
+            @SwitchWeaponAR.canceled += instance.OnSwitchWeaponAR;
+            @SwitchWeaponBurst.started += instance.OnSwitchWeaponBurst;
+            @SwitchWeaponBurst.performed += instance.OnSwitchWeaponBurst;
+            @SwitchWeaponBurst.canceled += instance.OnSwitchWeaponBurst;
+            @ShootHold.started += instance.OnShootHold;
+            @ShootHold.performed += instance.OnShootHold;
+            @ShootHold.canceled += instance.OnShootHold;
         }
 
         private void UnregisterCallbacks(IInGameActions instance)
@@ -441,9 +493,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Shoot.started -= instance.OnShoot;
-            @Shoot.performed -= instance.OnShoot;
-            @Shoot.canceled -= instance.OnShoot;
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
@@ -456,6 +505,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @SwitchWeaponShotgun.started -= instance.OnSwitchWeaponShotgun;
             @SwitchWeaponShotgun.performed -= instance.OnSwitchWeaponShotgun;
             @SwitchWeaponShotgun.canceled -= instance.OnSwitchWeaponShotgun;
+            @SwitchWeaponAR.started -= instance.OnSwitchWeaponAR;
+            @SwitchWeaponAR.performed -= instance.OnSwitchWeaponAR;
+            @SwitchWeaponAR.canceled -= instance.OnSwitchWeaponAR;
+            @SwitchWeaponBurst.started -= instance.OnSwitchWeaponBurst;
+            @SwitchWeaponBurst.performed -= instance.OnSwitchWeaponBurst;
+            @SwitchWeaponBurst.canceled -= instance.OnSwitchWeaponBurst;
+            @ShootHold.started -= instance.OnShootHold;
+            @ShootHold.performed -= instance.OnShootHold;
+            @ShootHold.canceled -= instance.OnShootHold;
         }
 
         public void RemoveCallbacks(IInGameActions instance)
@@ -569,11 +627,13 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnSwitchWeaponSniper(InputAction.CallbackContext context);
         void OnSwitchWeaponShotgun(InputAction.CallbackContext context);
+        void OnSwitchWeaponAR(InputAction.CallbackContext context);
+        void OnSwitchWeaponBurst(InputAction.CallbackContext context);
+        void OnShootHold(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

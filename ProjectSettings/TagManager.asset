@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Coin
   - AmmoBox
+  - AR
+  - BurstAR
+  - Burst
   layers:
   - Default
   - TransparentFX

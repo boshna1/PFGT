@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 
 public static class InputManager
 {
@@ -11,6 +13,7 @@ public static class InputManager
     {
         _gameControls = new GameControls();
         _gameControls.Permanent.Enable();
+        
 
         _gameControls.InGame.Movement.performed += w => 
         {
@@ -22,12 +25,14 @@ public static class InputManager
             myPlayer.SetJump();  
         };
 
-        _gameControls.InGame.Shoot.performed += w =>
-        {
-            if (DisplayText.instance.GetBullet() > 0 && myPlayer.GetDisableShoot() == false)
+        _gameControls.InGame.ShootHold.performed += co =>
+        {     
+
+            while (DisplayText.instance.GetBullet() > 0 && myPlayer.GetDisableShoot() == false)
             {
-                myPlayer.Shoot();
-                DisplayText.instance.RemoveBullet();
+                    myPlayer.Shoot();
+                    myPlayer.Recoil();
+                    DisplayText.instance.RemoveBullet();
             }
         };
 
@@ -38,7 +43,7 @@ public static class InputManager
 
         _gameControls.InGame.Reload.performed += w =>
         {
-            if (DisplayText.instance.GetBullet() < 6)
+            if (DisplayText.instance.GetBullet() < 28)
             { 
             DisplayText.instance.Reload();
             }
@@ -50,6 +55,14 @@ public static class InputManager
         _gameControls.InGame.SwitchWeaponShotgun.performed += w =>
         {
             myPlayer.SwitchShotgun();
+        };
+        _gameControls.InGame.SwitchWeaponAR.performed += w =>
+        {
+            myPlayer.SwitchAR();
+        };
+        _gameControls.InGame.SwitchWeaponBurst.performed += w =>
+        {
+            myPlayer.SwitchBurst();
         };
     }   
     public static void SetGameControls()

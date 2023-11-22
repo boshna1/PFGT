@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -34,10 +35,28 @@ public class Player : MonoBehaviour
 
     public GameObject Sniper;
     public GameObject Shotgun;
+    public GameObject AR;
+    public GameObject Burst;
 
     float FireRate;
     string WeaponType;
     bool disableShoot;
+
+    bool enableSniper = true;
+    bool enableShotgun = true;
+    bool enableAssault = false;
+    bool enableBurstAR = false;
+
+    public GameObject ReloadSlider;
+    float tempReloadSlider;
+    float recoverRecoil;
+
+    public GameObject FirePart;
+    public GameObject FireSoundSnipe;
+    public GameObject FireSoundShotgun;
+    public GameObject FireSoundAR;
+
+
 
     void Start()
     {
@@ -48,6 +67,8 @@ public class Player : MonoBehaviour
 
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = true;
+        DisplayText.instance.SwitchSniper();
+        SwitchSniper();
     }
 
     // Update is called once per frame
@@ -55,6 +76,17 @@ public class Player : MonoBehaviour
     {
         transform.position += transform.rotation * ((Vector3)(speed * Time.deltaTime * _moveDirection));
         CheckGrounded();
+        tempReloadSlider -= Time.deltaTime;
+        ReloadSlider.GetComponent<Slider>().value = tempReloadSlider / FireRate;
+        if (recoverRecoil > 0 && currentAngle.y < 0) 
+        {
+            currentAngle.y++;
+            recoverRecoil--;
+            if (currentAngle.y == 0) 
+            {
+                recoverRecoil = 0;
+            }
+        }
     }
 
     public void SetMovementDirection(Vector3 currentDireciton)
@@ -93,6 +125,8 @@ public class Player : MonoBehaviour
     {
         if (disableShoot == false && WeaponType == "Sniper")
         {
+            GameObject tempSound = Instantiate(FireSoundSnipe, transform.position, Quaternion.identity);
+            Destroy(tempSound, 2);
             Rigidbody currentBullet = Instantiate(bullet, transform.position + new Vector3(0, 0.2f), followTarget.rotation);
             disableShoot = true;
             currentBullet.AddForce(followTarget.forward * bulletForce, ForceMode.Impulse);
@@ -101,7 +135,9 @@ public class Player : MonoBehaviour
         }
         if (disableShoot == false && WeaponType == "Shotgun")
         {
-            Rigidbody currentBullet = Instantiate(bullet, transform.position + new Vector3(0, 0.2f), (followTarget.rotation * new Quaternion(10,10,0,0)));
+            GameObject tempSound = Instantiate(FireSoundShotgun, transform.position, Quaternion.identity);
+            Destroy(tempSound, 2);
+            Rigidbody currentBullet = Instantiate(bullet, transform.position + new Vector3(0, 0.2f), (followTarget.rotation * new Quaternion(10, 10, 0, 0)));
             Rigidbody currentBullet2 = Instantiate(bullet, transform.position + new Vector3(0, 0.2f), followTarget.rotation * new Quaternion(10, -10, 0, 0));
             Rigidbody currentBullet3 = Instantiate(bullet, transform.position + new Vector3(0, 0.2f), followTarget.rotation * new Quaternion(10, 10, 0, 0));
             Rigidbody currentBullet4 = Instantiate(bullet, transform.position + new Vector3(0, 0.2f), followTarget.rotation * new Quaternion(-10, 10, 0, 0));
@@ -125,24 +161,97 @@ public class Player : MonoBehaviour
             Destroy(currentBullet7, 2);
             Invoke("EnableShoot", FireRate);
         }
+        if (disableShoot == false && WeaponType == "AR")
+        {
+            GameObject tempSound = Instantiate(FireSoundAR, transform.position, Quaternion.identity);
+            Destroy(tempSound, 2);
+            Rigidbody currentBullet = Instantiate(bullet, transform.position + new Vector3(0, 0.2f), followTarget.rotation);
+            disableShoot = true;
+            currentBullet.AddForce(followTarget.forward * bulletForce, ForceMode.Impulse);
+            Destroy(currentBullet, 4);
+            Invoke("EnableShoot", FireRate);
+
+        }
+        if (disableShoot == false && WeaponType == "Burst")
+        {
+            GameObject tempSound = Instantiate(FireSoundAR, transform.position, Quaternion.identity);
+            Invoke("BurstShoot", 0.1f);
+            Invoke("BurstShoot", 0.2f);
+            Invoke("RecoilDelay",0.1f);
+            Invoke("RecoilDelay", 0.2f);
+            Destroy(tempSound, 2);
+            Rigidbody currentBullet = Instantiate(bullet, transform.position + new Vector3(0, 0.2f), followTarget.rotation);
+            disableShoot = true;
+            currentBullet.AddForce(followTarget.forward * bulletForce, ForceMode.Impulse);         
+            Destroy(currentBullet, 4);
+            Invoke("EnableShoot", FireRate);
+
+        }
+        GameObject fire = Instantiate(FirePart, transform.position + new Vector3(0, 0.28f,0.04f), followTarget.rotation);
+        
+        Destroy(fire, 0.2f);
+        tempReloadSlider = FireRate;
     }
 
     public void SwitchSniper()
     {
-        Destroy(currentGun);
-        currentGun = Instantiate(Sniper, Cow, false);
-        FireRate = 2;
-        WeaponType = "Sniper";
-        DisplayText.instance.SwitchSniper();
+        if (enableSniper == true)
+        {
+            Destroy(currentGun);
+            bulletForce = 20;
+            currentGun = Instantiate(Sniper, Cow, false);
+            FireRate = 2f;
+            WeaponType = "Sniper";
+            DisplayText.instance.SwitchSniper();
+        }
     }
 
     public void SwitchShotgun()
     {
+        if (enableShotgun == true) 
+        { 
         Destroy(currentGun);
+        bulletForce = 10;
         currentGun = Instantiate (Shotgun, Cow, false);
-        FireRate = 1.5f;
+        FireRate = 1f;
         WeaponType = "Shotgun";
         DisplayText.instance.SwitchShotgun();
+        }
+    }
+
+    public void SwitchAR()
+    {
+        if (enableAssault == true)
+        {
+            Destroy(currentGun);
+            bulletForce = 15;
+            currentGun = Instantiate(AR, Cow, false);
+            FireRate = 0.1f;
+            WeaponType = "AR";
+            DisplayText.instance.SwitchAR();
+        }
+    }
+
+    public void SwitchBurst()
+    {
+        if (enableBurstAR == true)
+        {
+            Destroy(currentGun);
+            bulletForce = 15;
+            currentGun = Instantiate(Burst, Cow, false);
+            FireRate = 0.3f;
+            WeaponType = "Burst";
+            DisplayText.instance.SwitchBurst();
+        }
+    }
+        
+    public void enableAR()
+    {
+        enableAssault = true;   
+    }
+    public void enableBurst()
+    {
+        enableBurstAR = true;
     }
 
     public void EnableShoot()
@@ -160,5 +269,44 @@ public class Player : MonoBehaviour
         return WeaponType;
     }
        
+    public void Recoil()
+    {
+        if (WeaponType == "Sniper")
+        {
+            currentAngle.y -= 50;
+            recoverRecoil = 50;
+        }
+        if (WeaponType == "Shotgun")
+        {
+            currentAngle.y -= 20;
+            recoverRecoil = 20;
+        }
+        if (WeaponType == "AR")
+        {
+            currentAngle.y -= 5;
+            recoverRecoil = 5;
+        }
+        if (WeaponType == "Burst")
+        {
+            currentAngle.y -= 5;
+            recoverRecoil = 5;
+        }
+    }
+    public void BurstShoot()
+    {
+        GameObject tempSound = Instantiate(FireSoundAR, transform.position, Quaternion.identity);
+        Destroy(tempSound, 2);
+        Rigidbody currentBullet = Instantiate(bullet, transform.position + new Vector3(0, 0.2f), followTarget.rotation);
+        disableShoot = true;
+        currentBullet.AddForce(followTarget.forward * bulletForce, ForceMode.Impulse);
+        Destroy(currentBullet, 4);
+
+    }
+
+    public void RecoilDelay()
+    {
+        currentAngle.y -= 5;
+        recoverRecoil = 5;
+    }
 }
 
